@@ -145,6 +145,27 @@ h3 { font-size: 19px; }
 .checks h3 { font-size: 18px; margin-bottom: 4px; }
 .checks p { color: var(--muted); font-size: 16px; }
 
+/* Hardware pack */
+.pack {
+  background: radial-gradient(45% 55% at 25% 60%, rgba(176, 20, 27, 0.2), transparent 70%), var(--bg);
+}
+.pack__grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 56px; align-items: center; margin-top: 48px; }
+.pack__hero { margin: 0; text-align: center; }
+.pack__hero svg { width: 100%; max-width: 230px; height: auto; margin: 0 auto; filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.5)); }
+.pack__hero figcaption { margin-top: 18px; color: var(--muted); font-size: 15px; letter-spacing: 0.04em; }
+.pack__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.pack__list li {
+  display: flex; gap: 18px; align-items: flex-start; padding: 20px 22px;
+  border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line);
+}
+.pack__list svg {
+  flex: none; width: 44px; height: 44px; padding: 10px; border-radius: 12px;
+  background: rgba(176, 20, 27, 0.18); fill: none; stroke: var(--red-soft);
+  stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+}
+.pack__list h3 { font-size: 18px; margin-bottom: 4px; }
+.pack__list p { color: var(--muted); font-size: 15px; }
+
 /* Features */
 .features {
   list-style: none; margin: 48px 0 0; padding: 0;
@@ -192,7 +213,8 @@ h3 { font-size: 19px; }
 
 /* Responsive */
 @media (max-width: 960px) {
-  .hero__grid, .live__grid { grid-template-columns: 1fr; }
+  .hero__grid, .live__grid, .pack__grid { grid-template-columns: 1fr; }
+  .pack__hero svg { max-width: 170px; }
   .live__grid { gap: 48px; }
   .live__text { order: -1; }
   .phone { width: 260px; }
