@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Atelier Ombelle — Architecture d'intérieur (démo Vizyu)</title>
+  <meta name="description" content="Site de démonstration : Atelier Ombelle, cabinet fictif d'architecture d'intérieur, intègre le widget Vizyu pour faire visiter son showroom en 360°." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#F4EFE7" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%233B3128'/%3E%3Cpath d='M9 24V14a7 7 0 0 1 14 0v10' fill='none' stroke='%23F4EFE7' stroke-width='2.4'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --lin: #f4efe7;
+      --sable: #e8dfd1;
+      --argile: #c9a98a;
+      --noyer: #6b4a2f;
+      --encre: #2b241e;
+      --gris: #6f655b;
+      --sauge: #a7b19a;
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --sans: "Inter", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body {
+      margin: 0;
+      background: var(--lin);
+      color: var(--encre);
+      font: 300 16px/1.65 var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    img, svg { display: block; max-width: 100%; }
+    .wrap { width: min(1160px, 100% - 32px); margin-inline: auto; }
+    .skip { position: absolute; left: -999px; }
+    .skip:focus { left: 16px; top: 16px; background: var(--encre); color: var(--lin); padding: 8px 12px; z-index: 10; }
+    :focus-visible { outline: 2px solid var(--noyer); outline-offset: 3px; }
+
+    .demo-banner {
+      background: var(--encre);
+      color: var(--sable);
+      font-size: 13px;
+      text-align: center;
+      padding: 8px 16px;
+    }
+    .demo-banner a { color: #fff; }
+
+    header.top { position: sticky; top: 0; z-index: 5; background: rgba(244, 239, 231, 0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--sable); }
+    .top__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 68px; }
+    .logo { font: 500 24px/1 var(--serif); letter-spacing: 0.06em; text-decoration: none; text-transform: uppercase; }
+    .logo small { display: block; font: 400 10px/1.4 var(--sans); letter-spacing: 0.24em; color: var(--gris); }
+    .top nav ul { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; font-size: 14px; }
+    .top nav a { text-decoration: none; color: var(--gris); }
+    .top nav a:hover { color: var(--encre); }
+    @media (max-width: 860px) { .top nav { display: none; } }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      min-height: 46px; padding: 0 22px;
+      background: var(--encre); color: var(--lin);
+      font: 400 14px/1 var(--sans); letter-spacing: 0.04em;
+      text-decoration: none; border-radius: 999px;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: var(--noyer); }
+    .btn--ghost { background: transparent; color: var(--encre); border: 1px solid var(--encre); }
+    .btn--ghost:hover { background: var(--encre); color: var(--lin); }
+    .btn--sm { min-height: 40px; padding: 0 16px; font-size: 13px; white-space: nowrap; }
+
+    .eyebrow { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gris); margin: 0 0 14px; }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.08; margin: 0; }
+    h1 { font-size: clamp(44px, 7vw, 84px); }
+    h1 em, h2 em { font-style: italic; color: var(--noyer); }
+    h2 { font-size: clamp(34px, 4.6vw, 54px); }
+    h3 { font-size: 26px; }
+    section { padding: clamp(64px, 9vw, 120px) 0; }
+
+    .hero { padding-top: clamp(40px, 6vw, 72px); }
+    .hero__grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+    .hero p.lead { font-size: 18px; color: var(--gris); max-width: 46ch; margin: 24px 0 32px; }
+    .hero__actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero__art { aspect-ratio: 4 / 5; border-radius: 220px 220px 8px 8px; overflow: hidden; background: var(--sable); }
+    @media (max-width: 860px) {
+      .hero__grid { grid-template-columns: 1fr; }
+      .hero__art { aspect-ratio: 1 / 1; max-height: 420px; border-radius: 180px 180px 8px 8px; }
+    }
+
+    .intro { display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; border-top: 1px solid var(--sable); padding-top: 48px; }
+    .intro p { margin: 0; color: var(--gris); font-size: 17px; }
+    .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 56px; }
+    .service { border-top: 1px solid var(--argile); padding-top: 20px; }
+    .service span { font: italic 400 20px/1 var(--serif); color: var(--noyer); }
+    .service h3 { margin: 10px 0 10px; }
+    .service p { margin: 0; color: var(--gris); font-size: 15px; }
+    @media (max-width: 860px) { .intro, .services { grid-template-columns: 1fr; } }
+
+    .projets { background: var(--sable); }
+    .projets__head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 40px; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .card__art { aspect-ratio: 3 / 4; border-radius: 6px; overflow: hidden; }
+    .card h3 { font-size: 24px; margin: 18px 0 4px; }
+    .card p { margin: 0; color: var(--gris); font-size: 14px; }
+    @media (max-width: 860px) { .cards { grid-template-columns: 1fr; } .card__art { aspect-ratio: 4 / 3; } }
+
+    .mobilier__list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
+    .piece { background: #fff; border-radius: 6px; padding: 20px; }
+    .piece__art { aspect-ratio: 1; border-radius: 4px; background: var(--lin); display: grid; place-items: center; }
+    .piece h3 { font-size: 22px; margin: 16px 0 4px; }
+    .piece p { margin: 0; color: var(--gris); font-size: 14px; display: flex; justify-content: space-between; gap: 12px; }
+    @media (max-width: 860px) { .mobilier__list { grid-template-columns: 1fr; } }
+
+    .showroom { background: var(--encre); color: var(--lin); }
+    .showroom__grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
+    .showroom .eyebrow, .showroom p { color: var(--sable); }
+    .showroom h2 em { color: var(--argile); }
+    .showroom p.lead { font-size: 17px; max-width: 48ch; margin: 22px 0 30px; }
+    .showroom .btn { background: var(--lin); color: var(--encre); }
+    .showroom .btn:hover { background: var(--argile); }
+    .showroom dl { display: grid; grid-template-columns: auto 1fr; gap: 10px 24px; margin: 0; font-size: 15px; }
+    .showroom dt { color: var(--argile); }
+    .showroom dd { margin: 0; }
+    .steps { list-style: none; padding: 0; margin: 32px 0 0; display: grid; gap: 14px; font-size: 15px; color: var(--sable); }
+    .steps li { display: flex; gap: 14px; }
+    .steps b { font: italic 400 22px/1 var(--serif); color: var(--argile); min-width: 22px; }
+    @media (max-width: 860px) { .showroom__grid { grid-template-columns: 1fr; } }
+
+    .contact { text-align: center; }
+    .contact p { color: var(--gris); max-width: 52ch; margin: 18px auto 30px; }
+
+    footer { border-top: 1px solid var(--sable); padding: 28px 0 40px; font-size: 13px; color: var(--gris); }
+    footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#contenu">Aller au contenu</a>
+
+  <p class="demo-banner">
+    Site de démonstration : Atelier Ombelle est un cabinet fictif qui illustre l'intégration de
+    <a href="/">Vizyu</a> sur le site d'un partenaire.
+  </p>
+
+  <header class="top">
+    <div class="wrap top__inner">
+      <a href="#haut" class="logo" id="haut">Ombelle<small>Architecture d'intérieur</small></a>
+      <nav aria-label="Sections">
+        <ul>
+          <li><a href="#studio">Le studio</a></li>
+          <li><a href="#realisations">Réalisations</a></li>
+          <li><a href="#mobilier">Mobilier</a></li>
+          <li><a href="#showroom">Showroom</a></li>
+        </ul>
+      </nav>
+      <a href="#contact" class="btn btn--sm">Prendre rendez-vous</a>
+    </div>
+  </header>
+
+  <main id="contenu">
+    <section class="hero">
+      <div class="wrap hero__grid">
+        <div>
+          <p class="eyebrow">Studio d'architecture d'intérieur · Lyon</p>
+          <h1>Des lieux qui <em>vous ressemblent</em>, pensés jusqu'au détail.</h1>
+          <p class="lead">
+            Rénovation d'appartements, aménagement de maisons et de commerces : nous dessinons
+            des intérieurs calmes et durables, du premier croquis au dernier luminaire.
+          </p>
+          <div class="hero__actions">
+            <a class="btn" href="https://vizyu-demo.vercel.app/v/demo_ombelle_marque/boutique/demo_ombelle_showroom" target="_blank" rel="noopener">
+              Visiter le showroom en 360°
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+            </a>
+            <a class="btn btn--ghost" href="#realisations">Voir nos réalisations</a>
+          </div>
+        </div>
+        <div class="hero__art" aria-hidden="true">
+          <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
+            <rect width="400" height="500" fill="#e8dfd1"/>
+            <rect y="330" width="400" height="170" fill="#c9a98a"/>
+            <path d="M0 330h400" stroke="#6b4a2f" stroke-width="2"/>
+            <path d="M210 330V170a60 60 0 0 1 120 0v160" fill="#f4efe7"/>
+            <path d="M226 330V178a44 44 0 0 1 88 0v152" fill="none" stroke="#c9a98a" stroke-width="2"/>
+            <rect x="40" y="262" width="170" height="54" rx="22" fill="#f4efe7" stroke="#6f655b" stroke-width="1.5"/>
+            <rect x="52" y="240" width="146" height="34" rx="16" fill="#f4efe7" stroke="#6f655b" stroke-width="1.5"/>
+            <path d="M62 316v14M188 316v14" stroke="#6b4a2f" stroke-width="3"/>
+            <path d="M130 0v120" stroke="#6b4a2f" stroke-width="1.5"/>
+            <path d="M104 146a26 26 0 0 1 52 0z" fill="#b8913f"/>
+            <circle cx="330" cy="292" r="26" fill="#a7b19a"/>
+            <path d="M330 318v12" stroke="#6b4a2f" stroke-width="3"/>
+            <rect x="248" y="352" width="120" height="10" rx="5" fill="#6b4a2f" opacity="0.35"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section id="studio">
+      <div class="wrap">
+        <div class="intro">
+          <div>
+            <p class="eyebrow">Le studio</p>
+            <h2>Une approche <em>sur mesure</em></h2>
+          </div>
+          <p>
+            Fondé à Lyon, Atelier Ombelle réunit architectes d'intérieur et artisans autour d'une même
+            exigence : des matières naturelles, une lumière maîtrisée et des espaces qui fonctionnent
+            au quotidien. Chaque projet commence par une écoute attentive de votre manière de vivre.
+          </p>
+        </div>
+        <div class="services">
+          <article class="service">
+            <span>01</span>
+            <h3>Conception</h3>
+            <p>Relevés, plans d'aménagement, ambiances et choix des matériaux, présentés en 3D.</p>
+          </article>
+          <article class="service">
+            <span>02</span>
+            <h3>Rénovation</h3>
+            <p>Coordination des artisans et suivi de chantier, du gros œuvre aux finitions.</p>
+          </article>
+          <article class="service">
+            <span>03</span>
+            <h3>Mobilier &amp; décoration</h3>
+            <p>Pièces dessinées sur mesure et sélection d'éditeurs, jusqu'à l'installation.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="projets" id="realisations">
+      <div class="wrap">
+        <div class="projets__head">
+          <div>
+            <p class="eyebrow">Réalisations</p>
+            <h2>Projets <em>récents</em></h2>
+          </div>
+          <a class="btn btn--ghost btn--sm" href="#showroom">Découvrir le showroom</a>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
+                <rect width="300" height="400" fill="#dfe3d9"/>
+                <rect y="280" width="300" height="120" fill="#a9825c"/>
+                <rect x="40" y="200" width="220" height="80" rx="4" fill="#f4efe7" stroke="#6f655b"/>
+                <rect x="70" y="150" width="160" height="50" fill="#a7b19a"/>
+                <path d="M150 0v90" stroke="#6b4a2f"/><circle cx="150" cy="104" r="16" fill="#b8913f"/>
+              </svg>
+            </div>
+            <h3>Appartement Croix-Rousse</h3>
+            <p>Rénovation complète · 96 m²</p>
+          </article>
+          <article class="card">
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
+                <rect width="300" height="400" fill="#ece6dc"/>
+                <rect y="290" width="300" height="110" fill="#9c7a57"/>
+                <rect x="50" y="210" width="200" height="80" rx="6" fill="#cfc6b8" stroke="#6f655b"/>
+                <path d="M60 120h180" stroke="#6b4a2f" stroke-width="3"/>
+                <rect x="80" y="70" width="40" height="50" fill="#c9a98a"/><rect x="180" y="80" width="30" height="40" fill="#a7b19a"/>
+              </svg>
+            </div>
+            <h3>Maison Monts d'Or</h3>
+            <p>Cuisine et pièce de vie · 140 m²</p>
+          </article>
+          <article class="card">
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
+                <rect width="300" height="400" fill="#e9e1d4"/>
+                <rect y="300" width="300" height="100" fill="#b08a63"/>
+                <path d="M100 300V150a50 50 0 0 1 100 0v150" fill="#3b3128" opacity="0.85"/>
+                <rect x="20" y="240" width="70" height="60" fill="#6b4a2f"/><rect x="210" y="240" width="70" height="60" fill="#6b4a2f"/>
+              </svg>
+            </div>
+            <h3>Boutique Presqu'île</h3>
+            <p>Aménagement de commerce · 60 m²</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="mobilier">
+      <div class="wrap">
+        <p class="eyebrow">Mobilier</p>
+        <h2>Pièces à voir <em>au showroom</em></h2>
+        <div class="mobilier__list">
+          <article class="piece">
+            <div class="piece__art" aria-hidden="true">
+              <svg viewBox="0 0 120 120" width="70%"><rect x="14" y="44" width="92" height="12" rx="3" fill="#6b4a2f"/><path d="M22 56v40M98 56v40" stroke="#6b4a2f" stroke-width="5"/></svg>
+            </div>
+            <h3>Console en noyer</h3>
+            <p><span>Noyer massif huilé</span><span>1 480 €</span></p>
+          </article>
+          <article class="piece">
+            <div class="piece__art" aria-hidden="true">
+              <svg viewBox="0 0 120 120" width="70%"><rect x="10" y="54" width="100" height="34" rx="14" fill="#efe9df" stroke="#6f655b" stroke-width="2"/><rect x="18" y="40" width="84" height="22" rx="10" fill="#efe9df" stroke="#6f655b" stroke-width="2"/></svg>
+            </div>
+            <h3>Canapé bouclé</h3>
+            <p><span>Laine bouclée, 3 places</span><span>3 200 €</span></p>
+          </article>
+          <article class="piece">
+            <div class="piece__art" aria-hidden="true">
+              <svg viewBox="0 0 120 120" width="70%"><path d="M60 8v40" stroke="#6b4a2f" stroke-width="2"/><path d="M30 76a30 30 0 0 1 60 0z" fill="#b8913f"/></svg>
+            </div>
+            <h3>Suspension en laiton</h3>
+            <p><span>Laiton brossé</span><span>640 €</span></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="showroom" id="showroom">
+      <div class="wrap showroom__grid">
+        <div>
+          <p class="eyebrow">Le showroom</p>
+          <h2>Entrez chez nous, <em>depuis chez vous</em></h2>
+          <p class="lead">
+            Parcourez notre showroom lyonnais en 360°, approchez les matières et posez vos questions
+            en direct à un architecte, sans vous déplacer.
+          </p>
+          <a class="btn" href="https://vizyu-demo.vercel.app/v/demo_ombelle_marque/boutique/demo_ombelle_showroom" target="_blank" rel="noopener">
+            Lancer la visite 360°
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+          </a>
+          <ol class="steps">
+            <li><b>1</b><span>Déplacez-vous de l'entrée au salon, puis à la cuisine.</span></li>
+            <li><b>2</b><span>Touchez un point pour découvrir une pièce et son prix.</span></li>
+            <li><b>3</b><span>Échangez avec un architecte par écrit, en audio ou en vidéo.</span></li>
+          </ol>
+        </div>
+        <dl>
+          <dt>Adresse</dt><dd>8 rue des Ateliers, 69006 Lyon</dd>
+          <dt>Horaires</dt><dd>Du mardi au samedi, 10 h – 19 h</dd>
+          <dt>Visite 360°</dt><dd>À toute heure, depuis ce site</dd>
+          <dt>Conseil en direct</dt><dd>Aux heures d'ouverture</dd>
+        </dl>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap">
+        <p class="eyebrow">Contact</p>
+        <h2>Parlons de <em>votre projet</em></h2>
+        <p>
+          Le plus simple : visitez le showroom en 360° et échangez directement avec l'équipe
+          grâce à la bulle en bas à droite de l'écran.
+        </p>
+        <a class="btn" href="https://vizyu-demo.vercel.app/v/demo_ombelle_marque/boutique/demo_ombelle_showroom" target="_blank" rel="noopener">Visiter et nous parler</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>Atelier Ombelle · cabinet fictif, site de démonstration</span>
+      <span>Visite 360° et conseil en direct propulsés par <a href="/">Vizyu</a></span>
+    </div>
+  </footer>
+
+  <!-- Widget Vizyu : ouvre directement la visite 360 du showroom (data-boutique). -->
+  <script
+    src="https://vizyu-demo.vercel.app/widget.js"
+    data-marque="demo_ombelle_marque"
+    data-boutique="demo_ombelle_showroom"
+    async
+  ></script>
+</body>
+</html>
