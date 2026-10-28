@@ -150,8 +150,12 @@ h3 { font-size: 19px; }
   background: radial-gradient(45% 55% at 25% 60%, rgba(176, 20, 27, 0.2), transparent 70%), var(--bg);
 }
 .pack__grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 56px; align-items: center; margin-top: 48px; }
-.pack__hero { margin: 0; text-align: center; }
-.pack__hero svg { width: 100%; max-width: 230px; height: auto; margin: 0 auto; filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.5)); }
+.pack__hero {
+  margin: 0; padding: 32px 0; text-align: center;
+  /* Soft light behind the dark camera so it stands out from the dark page. */
+  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.09), rgba(176, 20, 27, 0.12) 55%, transparent);
+}
+.pack__hero img { width: auto; max-height: 440px; margin: 0 auto; filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.6)); }
 .pack__hero figcaption { margin-top: 18px; color: var(--muted); font-size: 15px; letter-spacing: 0.04em; }
 .pack__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
 .pack__list li {
@@ -214,7 +218,7 @@ h3 { font-size: 19px; }
 /* Responsive */
 @media (max-width: 960px) {
   .hero__grid, .live__grid, .pack__grid { grid-template-columns: 1fr; }
-  .pack__hero svg { max-width: 170px; }
+  .pack__hero img { max-height: 320px; }
   .live__grid { gap: 48px; }
   .live__text { order: -1; }
   .phone { width: 260px; }
