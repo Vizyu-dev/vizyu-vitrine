@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Vizyu — Le magasin vient à vous</title>
+  <meta name="description" content="Vizyu relie le site e-commerce d'une marque à ses boutiques physiques : visite en 360°, conseil d'un vendeur en direct, achat en ligne." />
+  <meta property="og:title" content="Vizyu — Le magasin vient à vous" />
+  <meta property="og:description" content="La visite de boutique en 360° et le conseil vendeur en direct, au moment où le client hésite en ligne." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.vizyu.fr/" />
+  <meta name="theme-color" content="#0E0E0F" />
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/apple-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip" href="#contenu">Aller au contenu</a>
+
+  <header class="nav" id="haut">
+    <div class="wrap nav__inner">
+      <a href="#haut" class="nav__logo" aria-label="Vizyu, retour en haut">
+        <img src="assets/vizyu-logo-blanc.png" alt="Vizyu" width="110" height="21" />
+      </a>
+      <nav aria-label="Sections">
+        <ul class="nav__links">
+          <li><a href="#probleme">Le problème</a></li>
+          <li><a href="#solution">La solution</a></li>
+          <li><a href="#valeur">Pour qui</a></li>
+          <li><a href="#avancement">Avancement</a></li>
+        </ul>
+      </nav>
+      <a href="#contact" class="btn btn--sm">Nous contacter</a>
+    </div>
+  </header>
+
+  <main id="contenu">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="wrap hero__grid">
+        <div class="hero__text">
+          <p class="eyebrow">Commerce phygital</p>
+          <h1>Le magasin vient&nbsp;à&nbsp;vous.</h1>
+          <p class="lead">
+            Vizyu relie le site e-commerce d’une marque à ses boutiques physiques.
+            Depuis une page produit, le client visite la boutique en 360°, échange en direct
+            avec un vendeur, puis achète en ligne.
+          </p>
+          <div class="hero__cta">
+            <a href="#contact" class="btn">Demander une démo</a>
+            <a href="#solution" class="btn btn--ghost">Voir le parcours</a>
+          </div>
+        </div>
+
+        <div class="phone" aria-hidden="true">
+          <div class="phone__screen">
+            <div class="pano">
+              <div class="pano__grid"></div>
+              <div class="pano__shelf pano__shelf--a"></div>
+              <div class="pano__shelf pano__shelf--b"></div>
+              <div class="pano__shelf pano__shelf--c"></div>
+              <span class="hotspot hotspot--a"><span>+</span></span>
+              <span class="hotspot hotspot--b"><span>+</span></span>
+              <span class="navspot">›</span>
+            </div>
+            <div class="phone__top">
+              <div>
+                <strong>Boutique de Lyon</strong>
+                <small>Visite 360° · 2/5</small>
+              </div>
+              <span class="live-dot">EN DIRECT</span>
+            </div>
+            <div class="product">
+              <div class="product__thumb"></div>
+              <div>
+                <strong>Fauteuil en lin</strong>
+                <small>En stock ici · 490 €</small>
+              </div>
+            </div>
+            <div class="phone__bottom">
+              <span class="avail"><i></i>Camille est disponible</span>
+              <span class="phone__btn">Conseil vendeur</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem -->
+    <section class="section" id="probleme">
+      <div class="wrap narrow">
+        <p class="eyebrow">Le problème</p>
+        <h2>En ligne, le client hésite seul.</h2>
+        <p class="lead">
+          Les marques qui ont à la fois un site e-commerce et des boutiques perdent le conseil
+          d’un vendeur au moment précis où le client hésite. Et elles peinent à mesurer ce que
+          leurs boutiques apportent aux ventes en ligne.
+        </p>
+        <div class="cards cards--2">
+          <article class="card">
+            <h3>Le conseil reste en boutique</h3>
+            <p>Le savoir-faire des vendeurs ne profite qu’aux clients qui se déplacent.</p>
+          </article>
+          <article class="card">
+            <h3>Le rôle des boutiques est invisible</h3>
+            <p>Les ventes en ligne ne sont pas rapprochées des boutiques et des vendeurs qui les ont rendues possibles.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solution / journey -->
+    <section class="section section--alt" id="solution">
+      <div class="wrap">
+        <div class="narrow">
+          <p class="eyebrow">La solution</p>
+          <h2>Un parcours sans friction, de la page produit au vendeur.</h2>
+          <p class="lead">Aucun compte ni formulaire avant d’obtenir de la valeur. Tout se passe en quelques secondes, depuis un smartphone.</p>
+        </div>
+        <ol class="steps">
+          <li class="step">
+            <span class="step__n">1</span>
+            <h3>Le widget</h3>
+            <p>Sur la page produit de la marque, un bouton indique les boutiques où un vendeur est disponible.</p>
+          </li>
+          <li class="step">
+            <span class="step__n">2</span>
+            <h3>La visite 360°</h3>
+            <p>Le client choisit une boutique proche et s’y déplace en photos 360°, avec des produits cliquables.</p>
+          </li>
+          <li class="step">
+            <span class="step__n">3</span>
+            <h3>La file en direct</h3>
+            <p>Il entre immédiatement en file d’attente et regarde le vendeur en direct, façon live shopping.</p>
+          </li>
+          <li class="step">
+            <span class="step__n">4</span>
+            <h3>Le conseil</h3>
+            <p>À son tour, il parle ou écrit au vendeur. Sa caméra n’est jamais requise.</p>
+          </li>
+          <li class="step">
+            <span class="step__n">5</span>
+            <h3>L’achat</h3>
+            <p>Le vendeur envoie le lien du produit ; le client achète sur le site de la marque.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Value -->
+    <section class="section" id="valeur">
+      <div class="wrap">
+        <div class="narrow">
+          <p class="eyebrow">Proposition de valeur</p>
+          <h2>Trois gagnants à chaque échange.</h2>
+        </div>
+        <div class="cards cards--3">
+          <article class="card card--accent">
+            <p class="card__tag">Acheteur</p>
+            <h3>Voir et être conseillé sans se déplacer</h3>
+            <p>Sans rendez-vous, sans inscription : un conseil humain au moment où il en a besoin.</p>
+          </article>
+          <article class="card card--accent">
+            <p class="card__tag">Marque</p>
+            <h3>Convertir l’hésitation en achat</h3>
+            <p>Valoriser son réseau de boutiques et mesurer la contribution de chaque boutique et de chaque vendeur.</p>
+          </article>
+          <article class="card card--accent">
+            <p class="card__tag">Vendeur</p>
+            <h3>Des demandes déjà qualifiées</h3>
+            <p>Un outil simple sur tablette, avec le produit qui intéresse le client déjà connu.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Differentiators -->
+    <section class="section section--alt">
+      <div class="wrap">
+        <div class="narrow">
+          <p class="eyebrow">Ce qui nous distingue</p>
+          <h2>Pensé pour l’usage réel en boutique.</h2>
+        </div>
+        <ul class="features">
+          <li>
+            <h3>Zéro friction</h3>
+            <p>Le prénom est demandé pendant l’attente, l’e-mail après l’échange, et tout reste facultatif.</p>
+          </li>
+          <li>
+            <h3>L’attente devient du contenu</h3>
+            <p>Les clients en file regardent le vendeur en direct et échangent dans un chat commun.</p>
+          </li>
+          <li>
+            <h3>Le client choisit son mode</h3>
+            <p>Texte, audio ou vidéo, modifiable à tout moment pendant l’échange.</p>
+          </li>
+          <li>
+            <h3>Confidentialité par conception</h3>
+            <p>Le client en échange privé n’est jamais diffusé aux autres : la garantie repose sur l’architecture.</p>
+          </li>
+          <li>
+            <h3>Zéro effort pour le commerçant</h3>
+            <p>Le plan de visite est défini une fois ; chaque matin, le vendeur se contente de reprendre ses photos.</p>
+          </li>
+          <li>
+            <h3>Tout est mesuré</h3>
+            <p>Visites, contacts, appels, liens envoyés et cliqués : un tableau de bord par marque, boutique et vendeur.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Progress -->
+    <section class="section" id="avancement">
+      <div class="wrap">
+        <div class="narrow">
+          <p class="eyebrow">Avancement</p>
+          <h2>Un prototype fonctionnel, prêt pour l’étape suivante.</h2>
+          <p class="lead">Le parcours complet fonctionne de bout en bout, de la visite 360° à l’échange vidéo et au suivi des liens produits.</p>
+        </div>
+        <ol class="timeline">
+          <li class="timeline__item is-done">
+            <span class="timeline__dot"></span>
+            <p class="timeline__label">Réalisé</p>
+            <h3>Prototype de bout en bout</h3>
+            <p>Visite 360°, file en direct, échange vidéo, console vendeur, back-office et statistiques.</p>
+          </li>
+          <li class="timeline__item is-current">
+            <span class="timeline__dot"></span>
+            <p class="timeline__label">En cours</p>
+            <h3>Industrialisation</h3>
+            <p>Reconstruction de la plateforme sur une base robuste, prête pour l’exploitation.</p>
+          </li>
+          <li class="timeline__item">
+            <span class="timeline__dot"></span>
+            <p class="timeline__label">Ensuite</p>
+            <h3>Pilote en boutique</h3>
+            <p>Mise en service avec une première marque partenaire et ses vendeurs.</p>
+          </li>
+          <li class="timeline__item">
+            <span class="timeline__dot"></span>
+            <p class="timeline__label">À venir</p>
+            <h3>Déploiement</h3>
+            <p>Application mobile vendeur, espace marque et rapprochement avec les ventes en ligne.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact" id="contact">
+      <div class="wrap narrow center">
+        <p class="eyebrow">Investisseurs</p>
+        <h2>Découvrir Vizyu en démonstration.</h2>
+        <p class="lead">Nous présentons la démonstration et le dossier investisseur sur demande.</p>
+        <!-- TODO: replace with the real investor contact address. -->
+        <a class="btn" href="mailto:?subject=Vizyu%20%E2%80%94%20Demande%20de%20d%C3%A9monstration">Demander une démo</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <img src="assets/vizyu-logo-blanc.png" alt="Vizyu" width="84" height="16" />
+      <p>© <span id="annee">2026</span> Vizyu. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("annee").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
