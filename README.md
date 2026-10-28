@@ -6,4 +6,4 @@ Site statique de présentation de Vizyu destiné aux investisseurs, servi sur ww
 - `styles.css` : styles (charte Vizyu, police Outfit)
 - `assets/` : logo et icônes
 
-À compléter : l'adresse de contact investisseurs (lien « Demander une démo », section `#contact`).
+Contact investisseurs : contact@vizyu.fr (section `#contact`).
