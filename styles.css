@@ -118,6 +118,12 @@ h3 { font-size: 19px; }
   color: var(--red-soft) !important; margin-bottom: 14px;
 }
 
+/* Try-it demo journeys */
+.essai { display: flex; flex-direction: column; align-items: flex-start; }
+.essai .btn { margin-top: auto; }
+.essai p:not(.card__tag) { margin-bottom: 24px; }
+.essai__note { margin-top: 18px; font-size: 14px; color: var(--muted); }
+
 /* Steps */
 .steps {
   list-style: none; margin: 48px 0 0; padding: 0;
