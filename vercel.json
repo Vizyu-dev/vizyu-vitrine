@@ -1,6 +1,7 @@
 {
   "redirects": [
     { "source": "/atelier-ombelle", "destination": "/salon/", "permanent": true },
-    { "source": "/atelier-ombelle/:path*", "destination": "/salon/:path*", "permanent": true }
+    { "source": "/atelier-ombelle/", "destination": "/salon/", "permanent": true },
+    { "source": "/atelier-ombelle/:path+", "destination": "/salon/:path+", "permanent": true }
   ]
 }
