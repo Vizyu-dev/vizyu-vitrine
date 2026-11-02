@@ -47,7 +47,13 @@
       text-align: center;
       padding: 8px 16px;
     }
-    .demo-banner a { color: #fff; }
+    .demo-banner { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .demo-banner__back {
+      display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0;
+      min-height: 30px; padding: 0 12px; border-radius: 999px;
+      background: #9a1218; color: #fff; text-decoration: none; font-weight: 500;
+    }
+    .demo-banner__back:hover { background: #c81a22; }
 
     header.top { position: sticky; top: 0; z-index: 5; background: rgba(244, 239, 231, 0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--sable); }
     .top__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 68px; }
@@ -138,10 +144,13 @@
 <body>
   <a class="skip" href="#contenu">Aller au contenu</a>
 
-  <p class="demo-banner">
-    Site de démonstration : Atelier Ombelle est un cabinet fictif qui illustre l'intégration de
-    <a href="/">Vizyu</a> sur le site d'un partenaire.
-  </p>
+  <div class="demo-banner">
+    <a class="demo-banner__back" href="/">
+      <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      vizyu.fr
+    </a>
+    <span>Site de démonstration : Atelier Ombelle est un cabinet fictif qui illustre l'intégration de Vizyu sur le site d'un partenaire.</span>
+  </div>
 
   <header class="top">
     <div class="wrap top__inner">
