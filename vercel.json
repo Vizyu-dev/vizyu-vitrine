@@ -1,7 +1,10 @@
 {
   "redirects": [
-    { "source": "/atelier-ombelle", "destination": "/salon/", "permanent": true },
-    { "source": "/atelier-ombelle/", "destination": "/salon/", "permanent": true },
-    { "source": "/atelier-ombelle/:path+", "destination": "/salon/:path+", "permanent": true }
+    { "source": "/salon", "destination": "/studio-cod/", "permanent": true },
+    { "source": "/salon/", "destination": "/studio-cod/", "permanent": true },
+    { "source": "/salon/:path+", "destination": "/studio-cod/", "permanent": true },
+    { "source": "/atelier-ombelle", "destination": "/studio-cod/", "permanent": true },
+    { "source": "/atelier-ombelle/", "destination": "/studio-cod/", "permanent": true },
+    { "source": "/atelier-ombelle/:path+", "destination": "/studio-cod/", "permanent": true }
   ]
 }
