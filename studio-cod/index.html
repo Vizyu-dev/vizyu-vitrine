@@ -133,6 +133,37 @@
 
     footer { border-top: 1px solid var(--sable); padding: 28px 0 40px; font-size: 13px; color: var(--gris); }
     footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+    /* Démo : accroche animée qui pointe vers le module Vizyu (sous le widget, à gauche de sa bulle). */
+    .vz-hint, .vz-rings { position: fixed; z-index: 2147482999; opacity: 0; visibility: hidden; transition: opacity .35s ease, transform .55s cubic-bezier(.22,.8,.24,1), visibility 0s linear .35s; }
+    .vz-on .vz-hint, .vz-on .vz-rings { opacity: 1; visibility: visible; transition-delay: 0s; }
+    .vz-hint { right: 104px; bottom: 26px; display: flex; align-items: center; gap: 6px; padding: 0; border: 0; background: none; color: inherit; font-family: var(--sans); text-align: left; cursor: pointer; transform: translateX(-18px); }
+    .vz-on .vz-hint { transform: none; }
+    .vz-on.vz-over .vz-hint { opacity: 0; }
+    .vz-hint__card { display: block; padding: 10px 18px 11px; border-radius: 16px; background: var(--encre); color: var(--creme); box-shadow: 0 12px 30px rgba(30,27,24,.32); white-space: nowrap; transition: background .2s ease; }
+    .vz-hint:hover .vz-hint__card { background: #000; }
+    .vz-hint:focus-visible { outline: none; }
+    .vz-hint:focus-visible .vz-hint__card { outline: 2px solid var(--moutarde); outline-offset: 2px; }
+    .vz-hint__title { display: block; font: 400 20px/1.15 var(--serif); }
+    .vz-hint__sub { display: block; margin-top: 2px; font-size: 12.5px; color: #d9cfbf; }
+    .vz-hint__arrow { width: 44px; height: 34px; flex: none; color: #9a1218; overflow: visible; filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 2px #fff); }
+    .vz-rings { right: 24px; bottom: 24px; width: 68px; height: 68px; pointer-events: none; }
+    .vz-rings i { position: absolute; inset: 0; border-radius: 50%; border: 3px solid #9a1218; opacity: 0; animation: vz-ring 2.1s ease-out infinite; }
+    .vz-rings i + i { animation-delay: .7s; }
+    .vz-rings i + i + i { animation-delay: 1.4s; }
+    @keyframes vz-ring { 0% { transform: scale(1); opacity: .75; } 100% { transform: scale(2); opacity: 0; } }
+    @media (max-width: 480px) {
+      .vz-hint { right: 84px; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); gap: 4px; }
+      .vz-hint__card { padding: 8px 14px 9px; border-radius: 14px; }
+      .vz-hint__title { font-size: 17px; }
+      .vz-hint__sub { font-size: 11.5px; }
+      .vz-hint__arrow { width: 32px; height: 26px; }
+      .vz-rings { right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); width: 64px; height: 64px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .vz-rings i { animation: none; opacity: .5; transform: scale(1.25); }
+      .vz-rings i + i { display: none; }
+    }
   </style>
   <script defer src="https://cloud.umami.is/script.js" data-website-id="b482412a-9f38-4f22-98bb-086a1a3f7b88"></script>
 </head>
@@ -350,5 +381,55 @@
     data-message-repeat="always"
     async
   ></script>
+
+  <!-- Démo : invite à cliquer sur le module. Apparaît une fois le widget chargé, disparaît au premier clic dessus. -->
+  <button class="vz-hint" type="button" data-umami-event="studio-cod-accroche-module">
+    <span class="vz-hint__card">
+      <span class="vz-hint__title">Essayez la démo&nbsp;!</span>
+      <span class="vz-hint__sub">Cliquez sur le module Vizyu</span>
+    </span>
+    <svg class="vz-hint__arrow" viewBox="0 0 44 34" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M3 8c9-5 24-3 35 13" />
+      <path d="M27 21l11 1 2-11" />
+    </svg>
+  </button>
+  <div class="vz-rings" aria-hidden="true"><i></i><i></i><i></i></div>
+  <script>
+    (function () {
+      var page = document.documentElement;
+      var hint = document.querySelector(".vz-hint");
+      var host = function () { return document.getElementById("vizyu-widget"); };
+      var done = false;
+      var hide = function () { done = true; page.classList.remove("vz-on", "vz-over"); };
+      var inWidget = function (e, cls) {
+        return e.composedPath().some(function (el) { return el.classList && el.classList.contains(cls); });
+      };
+
+      // Sans widget (réseau, bloqueur), pas d'accroche qui pointe dans le vide.
+      var tries = 0;
+      var wait = setInterval(function () {
+        if (host()) {
+          clearInterval(wait);
+          setTimeout(function () { if (!done) page.classList.add("vz-on"); }, 900);
+        } else if (++tries > 60) {
+          clearInterval(wait);
+        }
+      }, 250);
+
+      hint.addEventListener("click", function () {
+        var bubble = host() && host().shadowRoot && host().shadowRoot.querySelector(".bubble");
+        hide();
+        if (bubble) bubble.click();
+      });
+      // Tout clic dans le module retire l'accroche, sauf la croix du message.
+      document.addEventListener("click", function (e) {
+        if (e.composedPath().indexOf(host()) !== -1 && !inWidget(e, "nudge-close")) hide();
+      });
+      // Au survol, la bulle s'élargit vers la gauche : l'accroche lui laisse la place.
+      document.addEventListener("mouseover", function (e) {
+        if (!done) page.classList.toggle("vz-over", inWidget(e, "bubble"));
+      });
+    })();
+  </script>
 </body>
 </html>
