@@ -16,6 +16,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="b482412a-9f38-4f22-98bb-086a1a3f7b88"></script>
 </head>
 <body>
   <a class="skip" href="#contenu">Aller au contenu</a>
@@ -36,7 +37,7 @@
           <li><a href="#avancement">Avancement</a></li>
         </ul>
       </nav>
-      <a href="#contact" class="btn btn--sm">Nous contacter</a>
+      <a href="#contact" class="btn btn--sm" data-umami-event="menu-nous-contacter">Nous contacter</a>
     </div>
   </header>
 
@@ -53,8 +54,8 @@
             avec un vendeur, puis achète en ligne.
           </p>
           <div class="hero__cta">
-            <a href="#contact" class="btn">Demander une démo</a>
-            <a href="#essai" class="btn btn--ghost">Essayer la démo</a>
+            <a href="#contact" class="btn" data-umami-event="entete-demander-demo">Demander une démo</a>
+            <a href="#essai" class="btn btn--ghost" data-umami-event="entete-essayer-demo">Essayer la démo</a>
           </div>
         </div>
 
@@ -86,13 +87,13 @@
             <p class="card__tag">Parcours client</p>
             <h3>Visitez le showroom en 360°</h3>
             <p>Depuis le site de Studio COD, ouvrez le widget Vizyu, parcourez la galerie en 360°, puis contactez le studio.</p>
-            <a class="btn" href="/studio-cod/" target="_blank" rel="noopener">Ouvrir le parcours client</a>
+            <a class="btn" href="/studio-cod/" target="_blank" rel="noopener" data-umami-event="essai-parcours-client">Ouvrir le parcours client</a>
           </article>
           <article class="card card--accent essai">
             <p class="card__tag">Parcours vendeur</p>
             <h3>Prenez la place du vendeur</h3>
             <p>Accédez directement à la console du showroom : passez « Disponible », recevez les clients en file et envoyez-leur des liens produits.</p>
-            <a class="btn" href="https://vizyu-demo.vercel.app/demo-vendeur" target="_blank" rel="noopener">Ouvrir le parcours vendeur</a>
+            <a class="btn" href="https://vizyu-demo.vercel.app/demo-vendeur" target="_blank" rel="noopener" data-umami-event="essai-parcours-vendeur">Ouvrir le parcours vendeur</a>
           </article>
         </div>
         <p class="essai__note">Espace de démonstration partagé : d’autres visiteurs peuvent l’utiliser en même temps que vous.</p>
@@ -364,8 +365,8 @@
         <p class="eyebrow">Investisseurs</p>
         <h2>Découvrir Vizyu en démonstration.</h2>
         <p class="lead">Nous présentons la démonstration et le dossier investisseur sur demande.</p>
-        <a class="btn" href="mailto:contact@vizyu.fr?subject=Vizyu%20%E2%80%94%20Demande%20de%20d%C3%A9monstration">Demander une démo</a>
-        <p class="contact__mail"><a href="mailto:contact@vizyu.fr">contact@vizyu.fr</a></p>
+        <a class="btn" href="mailto:contact@vizyu.fr?subject=Vizyu%20%E2%80%94%20Demande%20de%20d%C3%A9monstration" data-umami-event="contact-demander-demo">Demander une démo</a>
+        <p class="contact__mail"><a href="mailto:contact@vizyu.fr" data-umami-event="contact-email">contact@vizyu.fr</a></p>
       </div>
     </section>
   </main>
